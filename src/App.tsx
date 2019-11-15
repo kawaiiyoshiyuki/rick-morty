@@ -3,10 +3,12 @@ import './App.css';
 import {Store} from './Store';
 import { IAction, IEpisode } from './interfaces';
 
+const EpisodeList = React.lazy<any>(() => import('./EpisodeList'));
+
 const URL = "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes";
 
 const App = (): JSX.Element => {
-  const {state, dispatch} = React.useContext(Store);
+  const { state, dispatch } = React.useContext(Store);
 
   React.useEffect(() => {
     state.episodes.length === 0 && fetchDataAction()
@@ -44,6 +46,12 @@ const App = (): JSX.Element => {
     return dispatch(dispatchObj);
   };
 
+  const props = {
+    episodes: state.episodes,
+    toggleFavAction,
+    episodeInFav,
+  };
+
   return (
     <React.Fragment>
       {console.log(state)}
@@ -53,28 +61,16 @@ const App = (): JSX.Element => {
           <p>Pick your favourite episode!</p>
         </div>
         <div>
-            Favourites: {state.favourites.length}
+          Favourite(s): {state.favourites.length}
         </div>
       </header>
-      <section className="episode-layout">
-        {state.episodes.map((episode: IEpisode) => {
-           return (
-             <section key={episode.id} className="episode-box">
-               {episode.image && <img src={episode.image.medium} alt={`Rick and Morty ${episode.name}`} />}
-               <div>{episode.name}</div>
-              <section>
-                <div>Season: {episode.season} Number: {episode.number}</div>
-                <button type="button" className="btn" onClick={()=> toggleFavAction(episode)}>
-                 {/*alternative: state.favourites.find(fav => fav.id === episode.id) ? unfav : fav*/}
-                  {episodeInFav(episode) ? 'unafav' : 'fav'}
-                </button>
-              </section>
-             </section>
-           )
-        })}
-      </section>
+      <React.Suspense fallback={<div>loading ... </div>}>
+        <section className="episode-layout">
+          <EpisodeList {...props} />
+        </section>
+      </React.Suspense>
     </React.Fragment>
-  )
-};
+  );
+}
 
 export default App;
