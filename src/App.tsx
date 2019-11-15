@@ -2,17 +2,15 @@ import React from 'react';
 import logo from './logo.jpg';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-          Welcome
-        </h1>
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
-  );
+const { Provider, Consumer } = React.createContext("cau");
+
+export function Parent(props: any) {
+  const text = "random text";
+
+  return <Provider value={text}>{props.children}</Provider>;
 }
 
-export default App;
+export function Child() {
+  return <Consumer>{text => <div>{text}</div>}</Consumer>
+}
+
