@@ -48,8 +48,13 @@ const App = (): JSX.Element => {
     <React.Fragment>
       {console.log(state)}
       <header className="header">
-        <h1>Rick and Morty</h1>
-        <p>Pick your favourite episode!</p>
+        <div>
+          <h1>Rick and Morty</h1>
+          <p>Pick your favourite episode!</p>
+        </div>
+        <div>
+            Favourites: {state.favourites.length}
+        </div>
       </header>
       <section className="episode-layout">
         {state.episodes.map((episode: IEpisode) => {
@@ -60,7 +65,7 @@ const App = (): JSX.Element => {
               <section>
                 <div>Season: {episode.season} Number: {episode.number}</div>
                 <button type="button" className="btn" onClick={()=> toggleFavAction(episode)}>
-                // alternative: state.favourites.find(fav => fav.id === episode.id) ? unfav : fav
+                 {/*alternative: state.favourites.find(fav => fav.id === episode.id) ? unfav : fav*/}
                   {episodeInFav(episode) ? 'unafav' : 'fav'}
                 </button>
               </section>
