@@ -1,16 +1,36 @@
 import React from 'react';
-import logo from './logo.jpg';
 import './App.css';
 
-const { Provider, Consumer } = React.createContext("cau");
+// this context example is from https://fettblog.eu/typescript-react/context/
+// see it life: https://stackblitz.com/edit/react-ts-d4toch?file=index.tsx
 
-export function Parent(props: any) {
-  const text = "random text";
-
-  return <Provider value={text}>{props.children}</Provider>;
+type ContextProps = {
+  authenticated: boolean,
+  lang: string,
+  theme: string,
 }
 
-export function Child() {
-  return <Consumer>{text => <div>{text}</div>}</Consumer>
-}
+export const AppContext = React.createContext<Partial<ContextProps>>({});
 
+const Header = () => {
+  return <AppContext.Consumer>
+    {
+      ({authenticated}) => {
+        if(authenticated) {
+          return <h1>Logged in!</h1>
+        }
+        return <h1>You need to sign in</h1>
+      }
+    }
+  </AppContext.Consumer>
+};
+
+const App = () => {
+  return <AppContext.Provider value={{
+    authenticated: true,
+  }}>
+    <Header/>
+  </AppContext.Provider>
+};
+
+export default App;
