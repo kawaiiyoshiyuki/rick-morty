@@ -1,3 +1,7 @@
+import React from 'react';
+
+export type Dispatch = React.Dispatch<IAction>
+
 export interface IState {
   episodes: Array<IEpisode>;
   favourites: Array<IEpisode>;
@@ -5,7 +9,7 @@ export interface IState {
 
 export interface IAction {
   type: string;
-  payload: any;
+  payload: Array<IEpisode> | any;
 }
 
 export interface IEpisode {
@@ -24,7 +28,7 @@ export interface IEpisode {
 
 export interface IEpisodeProps {
   episodes: Array<IEpisode>;
-  store: {state: IState, dispatch: any};
-  toggleFavAction: (state: IState, e: IEpisode, dispatch: any) => IAction;
+  store: {state: IState, dispatch: Dispatch};
+  toggleFavAction: (state: IState, e: IEpisode, dispatch: Dispatch) => IAction;
   favourites: Array<IEpisode>;
 }

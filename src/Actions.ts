@@ -1,7 +1,8 @@
 import { IAction, IEpisode, IState } from "./interfaces";
+import { Dispatch } from "react";
 
 // get episodes data
-export const fetchDataAction = async (dispatch: any) => {
+export const fetchDataAction = async (dispatch: Dispatch<IAction>) => {
   const URL = "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes";
   const data = await fetch(URL);
   const dataJSON = await data.json();
