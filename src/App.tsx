@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-
-// this context example is from https://fettblog.eu/typescript-react/context/
-// see it life: https://stackblitz.com/edit/react-ts-d4toch?file=index.tsx
+import {Store} from './Store';
 
 type ContextProps = {
   authenticated: boolean,
@@ -10,27 +8,33 @@ type ContextProps = {
   theme: string,
 }
 
+const URL = "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes";
+
 export const AppContext = React.createContext<Partial<ContextProps>>({});
 
-const Header = () => {
-  return <AppContext.Consumer>
-    {
-      ({authenticated}) => {
-        if(authenticated) {
-          return <h1>Logged in!</h1>
-        }
-        return <h1>You need to sign in</h1>
-      }
-    }
-  </AppContext.Consumer>
-};
+const App = (): JSX.Element => {
+  const {state, dispatch} = React.useContext(Store);
 
-const App = () => {
-  return <AppContext.Provider value={{
-    authenticated: true,
-  }}>
-    <Header/>
-  </AppContext.Provider>
+  React.useEffect(() => {
+    state.episodes.length === 0 && fetchDataAction()
+  });
+
+  const fetchDataAction = async () => {
+    const data = await fetch(URL);
+    const dataJSON = await data.json();
+    return dispatch({
+      type: 'FETCH_DATA',
+      payload: dataJSON._embedded.episodes,
+    })
+  };
+
+  return (
+    <React.Fragment>
+      {console.log(state)}
+      <h1>Rick and Morty</h1>
+      <p>Pick your favourite episode!</p>
+    </React.Fragment>
+  )
 };
 
 export default App;
