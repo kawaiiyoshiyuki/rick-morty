@@ -9,15 +9,22 @@ export interface IAction {
 }
 
 export interface IEpisode {
-  airdate: string;
-  airstamp: string;
-  airtime: string;
+  airdate?: string;
+  airstamp?: string;
+  airtime?: string;
   id: number;
-  image: { medium: string, original: string};
+  image?: { medium: string, original: string};
   name: string;
-  number: number;
-  runtime: number;
+  number?: number;
+  runtime?: number;
   season: number;
   summary: string;
-  url: string;
+  url?: string;
+}
+
+export interface IEpisodeProps {
+  episodes: Array<IEpisode>;
+  store: {state: IState, dispatch: any};
+  toggleFavAction: (state: IState, e: IEpisode, dispatch: any) => IAction;
+  favourites: Array<IEpisode>;
 }

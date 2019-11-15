@@ -40,3 +40,7 @@
   border: 3px solid rgba(70, 144, 255, .8);
   margin: 1px;
 }
+
+.link {
+  margin: 0 5px;
+}
