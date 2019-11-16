@@ -1,4 +1,5 @@
 .episode-layout {
+  width: 100vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -6,7 +7,13 @@
 }
 
 .episode-box {
-  padding: .5rem
+  padding: .5rem;
+  transform: translateZ(0);
+  transition: transform 0.1s ease-out;
+}
+
+.episode-box:hover {
+  transform: scale(1.015);
 }
 
 .header {
