@@ -14,8 +14,8 @@ const App = (props: any): JSX.Element => {
           <p>Pick your favourite episode!</p>
         </div>
         <div>
-          <Link className="link" to='/'>Home</Link>
-          <Link className="link" to='/faves'>Favourites: {state.favourites.length}</Link>
+          <Link className="link" to='/rick-morty'>Home</Link>
+          <Link className="link" to='/rick-morty/faves'>Favourites: {state.favourites.length}</Link>
         </div>
       </header>
       {props.children}
