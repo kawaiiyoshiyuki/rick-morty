@@ -21,8 +21,8 @@ export interface IEpisode {
   name: string;
   number?: number;
   runtime?: number;
-  season: number;
-  summary: string;
+  season?: number;
+  summary?: string;
   url?: string;
 }
 

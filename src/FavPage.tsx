@@ -1,7 +1,7 @@
 import React from 'react';
-import { Store } from "./Store";
+import { Store } from './Store';
 import { toggleFavAction } from './Actions';
-import { IEpisodeProps } from "./interfaces";
+import { IEpisodeProps } from './interfaces';
 
 const EpisodeList = React.lazy<any>(() => import('./EpisodeList'));
 
@@ -15,7 +15,7 @@ const FavPage = (): JSX.Element => {
     favourites: state.favourites,
   };
 
-  return(
+  return (
     <React.Suspense fallback={<div>loading ... </div>}>
       <section className="episode-layout">
         <EpisodeList {...props} />

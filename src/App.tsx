@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Link} from '@reach/router';
-import { Store } from "./Store";
+import { Store } from './Store';
 
 const App = (props: any): JSX.Element => {
   const { state } = React.useContext(Store);
@@ -13,10 +13,10 @@ const App = (props: any): JSX.Element => {
           <h1>Rick and Morty</h1>
           <p>Pick your favourite episode!</p>
         </div>
-        <div>
-          <Link className="link" to='/rick-morty'>Home</Link>
-          <Link className="link" to='/rick-morty/faves'>Favourites: {state.favourites.length}</Link>
-        </div>
+        <nav>
+          <Link className="link" to={process.env.PUBLIC_URL + '/'}>Home</Link>
+          <Link className="link" to={process.env.PUBLIC_URL + '/faves'}>Favourites: {state.favourites.length}</Link>
+        </nav>
       </header>
       {props.children}
     </React.Fragment>

@@ -1,4 +1,4 @@
-import { IAction, IEpisode, IState } from "./interfaces";
+import { IAction, IEpisode, IState } from './interfaces';
 import { Dispatch } from "react";
 
 // get episodes data

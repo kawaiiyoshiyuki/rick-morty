@@ -1,5 +1,5 @@
 import React from 'react';
-import { IEpisode } from "./interfaces";
+import { IEpisode } from './interfaces';
 
 const EpisodeList = (props: any): Array<JSX.Element> => {
   const { episodes, store, toggleFavAction, favourites } = props;

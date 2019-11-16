@@ -1,7 +1,7 @@
 import React from 'react';
-import { Store } from "./Store";
-import { IEpisodeProps } from "./interfaces";
-import { fetchDataAction, toggleFavAction } from "./Actions";
+import { Store } from './Store';
+import { IEpisodeProps } from './interfaces';
+import { fetchDataAction, toggleFavAction } from './Actions';
 
 const EpisodeList = React.lazy<any>(() => import('./EpisodeList'));
 
@@ -18,7 +18,7 @@ const HomePage = () => {
     toggleFavAction,
     favourites: state.favourites,
   };
-
+console.log(props.episodes.filter(ep => ep.id === 14309));
   return (
     <React.Fragment>
       <React.Suspense fallback={<div>loading ... </div>}>
